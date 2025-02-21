@@ -16,7 +16,9 @@ namespace EFCoreProductApp.Web.Controllers
 
         public IActionResult Index(int pageNumber = 1, int pageSize = 10)
         {
-            var categories = _categoryRepository.GetAllCategories()
+            var categories = _categoryRepository.GetAllCategories().ToList();
+            ViewBag.TotalPages = Math.Ceiling((double)categories.Count() / pageSize);
+            categories = _categoryRepository.GetAllCategories()
                 .Skip((pageNumber - 1) * pageSize)
                 .Take(pageSize)
                 .ToList();

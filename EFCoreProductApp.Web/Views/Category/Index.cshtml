@@ -40,7 +40,10 @@
         <a asp-action="Index" asp-route-pageNumber="@(ViewBag.PageNumber - 1)" asp-route-pageSize="@ViewBag.PageSize" class="btn btn-outline-primary mx-3">Previous</a>
     }
     <span>Page @ViewBag.PageNumber</span>
-    <a asp-action="Index" asp-route-pageNumber="@(ViewBag.PageNumber + 1)" asp-route-pageSize="@ViewBag.PageSize" class="btn btn-outline-primary mx-3">Next</a>
+    @if(ViewBag.PageNumber != ViewBag.TotalPages)
+    {
+        <a asp-action="Index" asp-route-pageNumber="@(ViewBag.PageNumber + 1)" asp-route-pageSize="@ViewBag.PageSize" class="btn btn-outline-primary mx-3">Next</a>
+    }
 </div>
 <br></br>
 <a asp-controller="Home" asp-action="Index" class="btn btn-secondary">Back To Home</a>
