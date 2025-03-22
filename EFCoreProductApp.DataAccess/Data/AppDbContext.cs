@@ -1,6 +1,8 @@
 ﻿using EFCoreProductApp.Business.Models;
+using EFCoreProductApp.DataAccess.Migrations;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,9 +26,12 @@ namespace EFCoreProductApp.DataAccess.Data
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId)
-                .OnDelete(DeleteBehavior.Cascade);
+                //.OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
+
 
             base.OnModelCreating(modelBuilder);
         }
     }
 }
+//Add - Migration UpdateCategoryDeleteBehavior

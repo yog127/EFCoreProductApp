@@ -90,5 +90,18 @@ namespace EFCoreProductApp.Web.Controllers
             _categoryRepository.DeleteCategory(id);
             return RedirectToAction("Index");
         }
+        //[HttpPost]
+        //public IActionResult DeleteCategory(int id)
+        //{
+        //    bool isDeleted = _categoryRepository.DeleteCategory(id);
+
+        //    if (!isDeleted)
+        //    {
+        //        TempData["ErrorMessage"] = "Cannot delete this category because it has associated products.";
+        //    }
+
+        //    return RedirectToAction("CategoryList");  // Adjust according to your view name
+        //}
+
     }
 }
