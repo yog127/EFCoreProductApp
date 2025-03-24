@@ -1,6 +1,7 @@
 ﻿using EFCoreProductApp.Business.Models;
 using EFCoreProductApp.Business.Repository;
 using EFCoreProductApp.DataAccess.Data;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,14 +45,43 @@ namespace EFCoreProductApp.DataAccess.Repository
             }
         }
 
+        //public void DeleteCategory(int id)
+        //{
+        //    var category = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
+        //    if (category != null)
+        //    {
+        //        _context.Categories.Remove(category);
+        //        _context.SaveChanges();
+        //    }
+        //}
         public void DeleteCategory(int id)
         {
-            var category = _context.Categories.FirstOrDefault(c => c.CategoryId == id);
-            if (category != null)
+            var category = _context.Categories.Include(c => c.Products).FirstOrDefault(c => c.CategoryId == id);
+
+            if (category != null && !category.Products.Any())  // Check if products exist
             {
                 _context.Categories.Remove(category);
                 _context.SaveChanges();
             }
+            else
+            {
+                throw new InvalidOperationException("Cannot delete category with associated products.");
+            }
         }
+        //public bool DeleteCategory(int id)
+        //{
+        //    var category = _context.Categories.Include(c => c.Products).FirstOrDefault(c => c.CategoryId == id);
+
+        //    if (category != null && !category.Products.Any())  // If no associated products
+        //    {
+        //        _context.Categories.Remove(category);
+        //        _context.SaveChanges();
+        //        return true;  // Successfully deleted
+        //    }
+
+        //    return false;  // Deletion failed due to associated products
+        //}
+
+
     }
 }

@@ -24,14 +24,13 @@ namespace EFCoreProductApp.DataAccess.Data
                 .HasOne(p => p.Category)
                 .WithMany(c => c.Products)
                 .HasForeignKey(p => p.CategoryId)
-<<<<<<< Updated upstream
-                .OnDelete(DeleteBehavior.Cascade);
-=======
+
+                //.OnDelete(DeleteBehavior.Cascade);
+
                 //.OnDelete(DeleteBehavior.Cascade);
                 .OnDelete(DeleteBehavior.Restrict);
                 //.OnDelete(DeleteBehavior.Restrict);
 
->>>>>>> Stashed changes
 
             base.OnModelCreating(modelBuilder);
         }
